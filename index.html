@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Boutique Elegante</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>✨ Mi Boutique Elegante ✨</h1>
+        <nav>
+            <a href="#productos">Productos</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <section id="productos">
+        <h2>Productos</h2>
+        <div class="grid">
+            <div class="producto">
+                <img src="https://via.placeholder.com/200" alt="Producto 1">
+                <h3>Producto 1</h3>
+                <p>$50.00</p>
+                <button onclick="pagar('Producto 1', 50)">Comprar</button>
+            </div>
+            <div class="producto">
+                <img src="https://via.placeholder.com/200" alt="Producto 2">
+                <h3>Producto 2</h3>
+                <p>$70.00</p>
+                <button onclick="pagar('Producto 2', 70)">Comprar</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <p>WhatsApp: <a href="https://wa.me/tu-numero" target="_blank">Enviar mensaje</a></p>
+    </section>
+
+    <footer>
+        <p>© 2026 Mi Boutique Elegante</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
