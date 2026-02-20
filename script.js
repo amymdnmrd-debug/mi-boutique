@@ -1,49 +1,65 @@
-// Array para guardar los productos que el cliente agrega
+// Array para guardar productos en el carrito
 let cart = [];
+let stripe = Stripe("TU_PUBLIC_KEY_DE_STRIPE"); // Poner tu clave pública
 
-// Conectar Stripe (pon tu clave pública)
-let stripe = Stripe("TU_PUBLIC_KEY_DE_STRIPE"); 
+// Banner rotativo
+const banner = document.getElementById('banner-text');
+const messages = [
+  "Free Shipping on orders over $29.99",
+  "New Arrivals: Check our latest collection!",
+  "Limited Time Offer: Buy 2 Get 1 Free!"
+];
+let bannerIndex = 0;
+function rotateBanner() {
+  banner.textContent = messages[bannerIndex];
+  bannerIndex = (bannerIndex + 1) % messages.length;
+}
+setInterval(rotateBanner, 4000);
 
-// Cargar productos desde products.json
+// Cargar productos
 fetch("products.json")
   .then(res => res.json())
   .then(data => {
     let container = document.getElementById("products");
-data.forEach(product => {
-  container.innerHTML += `
-    <div>
-      <img src="${product.image}" width="150" alt="${product.name}">
-      <h3>${product.name}</h3>
-      <p>$${product.price / 100}</p>
-      <button onclick="addToCart(${product.id}, '${product.name}', ${product.price})">Agregar</button>
-    </div>
-  `;
-});
+    data.forEach(product => {
+      container.innerHTML += `
+        <div>
+          <img src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <p>$${product.price / 100}</p>
+          <button onclick="addToCart(${product.id}, '${product.name}', ${product.price})">Agregar</button>
+        </div>
+      `;
+    });
   });
 
-// Función para agregar un producto al carrito
+// Agregar producto al carrito
 function addToCart(id, name, price) {
   cart.push({id, name, price});
   renderCart();
 }
 
-// Función para mostrar el carrito
+// Mostrar carrito y contar items
 function renderCart() {
   let cartDiv = document.getElementById("cart");
+  let cartCount = document.getElementById("cart-count");
+  let cartTotal = document.getElementById("cart-total");
+  
   cartDiv.innerHTML = "";
   let total = 0;
-
+  
   cart.forEach(item => {
     total += item.price;
     cartDiv.innerHTML += `<p>${item.name} - $${item.price / 100}</p>`;
   });
-
-  cartDiv.innerHTML += `<h3>Total: $${total / 100}</h3>`;
+  
+  cartCount.textContent = cart.length;
+  cartTotal.textContent = `Total: $${(total/100).toFixed(2)}`;
 }
 
-// Función para enviar carrito a Stripe y abrir Checkout
+// Checkout con Stripe
 function checkout() {
-  fetch("TU_BACKEND_STRIPE_URL", { // Pon aquí tu URL del backend gratis
+  fetch("TU_BACKEND_STRIPE_URL", { // Poner URL de backend
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify({cart})
