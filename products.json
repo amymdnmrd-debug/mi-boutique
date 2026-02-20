@@ -1,0 +1,5 @@
+[
+  { "id": 1, "name": "Collar Estrella", "price": 4500 },
+  { "id": 2, "name": "Pulsera Luna", "price": 3500 },
+  { "id": 3, "name": "Anillo Sol", "price": 5500 }
+]
