@@ -8,13 +8,27 @@
 </head>
 <body>
 
+<!-- Banner rotativo -->
+<div id="top-banner">
+  <p id="banner-text">Free Shipping on orders over $29.99</p>
+</div>
+
 <h1>CIELO Y ORO</h1>
 
-<div id="products"></div>
+<div id="main-container">
+  <!-- Sección de productos -->
+  <div id="products-container">
+    <div id="products"></div>
+  </div>
 
-<h2>Carrito</h2>
-<div id="cart"></div>
-<button onclick="checkout()">Finalizar compra</button>
+  <!-- Carrito a la derecha -->
+  <div id="cart-container">
+    <h2>Mi Carrito (<span id="cart-count">0</span>)</h2>
+    <div id="cart"></div>
+    <h3 id="cart-total">Total: $0.00</h3>
+    <button onclick="checkout()">Finalizar compra</button>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>
