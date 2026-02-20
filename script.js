@@ -9,15 +9,16 @@ fetch("products.json")
   .then(res => res.json())
   .then(data => {
     let container = document.getElementById("products");
-    data.forEach(product => {
-      container.innerHTML += `
-        <div>
-          <h3>${product.name}</h3>
-          <p>$${product.price / 100}</p>
-          <button onclick="addToCart(${product.id}, '${product.name}', ${product.price})">Agregar</button>
-        </div>
-      `;
-    });
+data.forEach(product => {
+  container.innerHTML += `
+    <div>
+      <img src="${product.image}" width="150" alt="${product.name}">
+      <h3>${product.name}</h3>
+      <p>$${product.price / 100}</p>
+      <button onclick="addToCart(${product.id}, '${product.name}', ${product.price})">Agregar</button>
+    </div>
+  `;
+});
   });
 
 // Función para agregar un producto al carrito
